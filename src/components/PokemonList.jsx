@@ -1,26 +1,31 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import PokemonCard from "./PokemonCard";
+import { useLocation } from "react-router-dom";
 
-const PokemonList = ({ isVisible }) => {
+const PokemonList = () => {
   const [pokemonData, setPokemonData] = useState(null);
+
+  const location = useLocation();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        if(location.pathname.includes('/pokemon/all')){
           const response = await axios.get("https://pokeapi.co/api/v2/pokemon/");
           setPokemonData(response.data);
-         
+          console.log(response.data);
+        }
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
 
-    if (isVisible) {
-      fetchData();
-    }
+ 
+    fetchData();
     
-  }, [isVisible]);
+    
+  }, [location.pathname]);
 
   return (
     <div id="listaPokemon" className="pokemon-list p-4 pt-8">
