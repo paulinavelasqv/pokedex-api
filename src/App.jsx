@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import IndexPage from "./pages/IndexPage";
 import PokemonListPage from "./pages/PokemonListPage";
 import SearchedPokemon from './pages/SearchedPokemon';
+import NotFoundPage from './pages/NotFoundPage'
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Route path="/" element={<IndexPage />} />
         <Route path="/pokemon/all" element={<PokemonListPage />} />
         <Route path="/pokemon/:pokemonName" element={<SearchedPokemon />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Router>
   );
