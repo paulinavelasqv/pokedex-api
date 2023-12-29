@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import SearchForm from "../components/SearchForm";
 import { AiFillHome } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import SearchPokemon from "../components/SearchPokemon";
 
 
 function SearchedPokemon() {
-  const [searchedPokemon, setSearchedPokemon] = useState("");
+  const { pokemonName } = useParams();
+  
   
 
-  const searchPokemon = (pokemonName) => {
-    // Actualizar el estado con el nombre del Pokémon buscado
-    setSearchedPokemon(pokemonName.texto.trim());
-    console.log(searchedPokemon);
+  const handleSearch = (searchTerm) => {
+    // You can handle the search logic here, for example, redirect to the new Pokémon page
+    console.log("Searching for:", searchTerm);
+    // Redirect to the new Pokémon page or update the URL
   };
 
 
@@ -28,12 +29,12 @@ function SearchedPokemon() {
           <h1 className="font-primary text-5xl text-blue-pokemon mb-2">
             Gotta catch 'em all!
           </h1>
-          <SearchForm onClick={searchPokemon} />
+          <SearchForm onSearch={handleSearch} />
         </div>
         <div></div>
       </div>
       <div className="pokemon-list p-4 pt-2 bg-white h-full overflow-y-auto">
-        <SearchPokemon pokemonName={searchedPokemon} />
+        <SearchPokemon pokemonName={pokemonName} />
       </div>
     </div>
   );

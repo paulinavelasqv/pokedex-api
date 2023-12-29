@@ -4,6 +4,8 @@ import PokemonCard from '../components/PokemonCard';
 
 function SearchPokemon({ pokemonName }) {
   const [pokemonData, setPokemonData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -12,16 +14,29 @@ function SearchPokemon({ pokemonName }) {
           `https://pokeapi.co/api/v2/pokemon/${pokemonName}`
         );
         setPokemonData(response.data);
-        console.log(response.data);
+        setIsLoading(false);
+        
       } catch (error) {
-        console.error("Error fetching data:", error);
+        setError(error);
+        setIsLoading(false);
       }
     };
 
     fetchData();
   }, [pokemonName]);
 
-  console.log('SearchPokemon.jsx ultimo Componente: ', pokemonData);
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error.message}</p>;
+  }
+
+  if (!pokemonData) {
+    return <p>No data available for {pokemonName}</p>;
+  }
+
 
   return (
     <div id="listaPokemon" className="pokemon-list p-4 pt-8">
