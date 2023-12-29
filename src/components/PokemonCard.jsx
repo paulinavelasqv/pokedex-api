@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PokemonCardExpanded from "./PokemonCardExpanded";
 
 const PokemonCard = ({ name, id, image }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -34,17 +35,13 @@ const PokemonCard = ({ name, id, image }) => {
           className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50"
           onClick={handleBackgroundClick}
         >
-          <div className="bg-white p-4 rounded-md relative">
-            <button
-              className="absolute top-2 right-2 text-xl cursor-pointer"
-              onClick={closeModal}
-            >
-              X
-            </button>
-            <p>ID: {id}</p>
-            <p>Name: {name}</p>
-            {/* Otros detalles del Pokémon */}
-          </div>
+          <PokemonCardExpanded name={name} id={id} />
+          <button
+            className="absolute top-2 right-2 text-xl cursor-pointer"
+            onClick={closeModal}
+          >
+            X
+          </button>
         </div>
       )}
     </div>
