@@ -6,6 +6,7 @@ function SearchPokemon({ pokemonName }) {
   const [pokemonData, setPokemonData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const flag = false;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,10 +45,9 @@ function SearchPokemon({ pokemonName }) {
         <div className="flex justify-center items-center h-screen">
           <div className="pokemon-cards-container h-full">
             <PokemonCard
-              key={pokemonData.name}
-              name={pokemonData.name}
-              id={pokemonData.id}
-              image={pokemonData.sprites.other.dream_world.front_default}
+              key={pokemonData.id}
+              data={pokemonData}
+              flag={flag}
             />
           </div>
         </div>

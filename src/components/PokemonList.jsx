@@ -5,7 +5,8 @@ import { useLocation } from "react-router-dom";
 
 const PokemonList = () => {
   const [pokemonData, setPokemonData] = useState(null);
-
+  const [id, setId] = useState(null);
+  const allPokemon = true;
   const location = useLocation();
 
   useEffect(() => {
@@ -25,20 +26,17 @@ const PokemonList = () => {
     fetchData();
   }, [location.pathname]);
 
+  const obtenerId = () => {
+    pokemonData.results.map((pokemon) => {
+      setId(pokemon.url.split("/")[6]);
+    });
+  };
+
   return (
     <div id="listaPokemon" className="pokemon-list p-4 pt-8">
       {pokemonData && (
         <div className="pokemon-cards-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 h-full gap-4">
-          {pokemonData.results.map((pokemon) => (
-            <PokemonCard
-              key={pokemon.name}
-              name={pokemon.name}
-              id={pokemon.url.split("/")[6]}
-              image={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${
-                pokemon.url.split("/")[6]
-              }.png`}
-            />
-          ))}
+          {<PokemonCard key={obtenerId} data={pokemonData} flag={allPokemon} />}
         </div>
       )}
     </div>
