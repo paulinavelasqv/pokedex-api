@@ -1,8 +1,26 @@
 import React, { useState } from "react";
 import SearchIcon1 from "../images/search-icon1.png";
-import { useLocation, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-function SearchForm() {
+
+
+function SearchForm(props) {
+  const [input, setInput] = useState("");
+
+  const handleInputChange = (event) => {
+    setInput(event.target.value);
+  };
+
+  const handleSend = (e) => {
+    e.preventDefault();
+
+    const pokemonDetails = {
+      texto: input
+    }
+
+    console.log('SearchedPOkemonPage: ', pokemonDetails);
+    props.onClick(pokemonDetails);
+  };
 
   return (
     <form className="search-form flex flex-row items-center">
@@ -11,15 +29,21 @@ function SearchForm() {
         type="text"
         placeholder="Ex: Pikachu"
         name="pokemon"
+        onChange={handleInputChange}
       />
-      <Link to='/pokemon/pokemon'>
-        <div className="search-button-container active:scale-95">
+      <Link to='/pokemon/'>
+      <div className="search-button-container active:scale-95 rounded-full bg-yellow-pokemon border border-black text-blue-pokemon" >
+        <button onClick={handleSend}>
+          Buscar
+        </button>
+        </div>
+        {/* <div className="search-button-container active:scale-95" onSubmit={handleSend}>
           <img
             className="h-12 ml-2 cursor-pointer transition"
             src={SearchIcon1}
             alt="search icon 1"
           />
-        </div>
+        </div> */}
       </Link>
       
     </form>

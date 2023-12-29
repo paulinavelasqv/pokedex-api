@@ -5,6 +5,7 @@ import PokemonListPage from "./pages/PokemonListPage";
 import SearchedPokemon from "./pages/SearchedPokemon";
 
 function App() {
+
   return (
     <Router>
       <Routes>
@@ -21,7 +22,7 @@ function App() {
           }
         />
         <Route
-          path="/pokemon/pokemon"
+          path="/pokemon/"
           element={
             <SearchedPokemon />
           }

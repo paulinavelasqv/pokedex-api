@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import SearchForm from "../components/SearchForm";
-import PokemonList from "../components/PokemonList";
 import { AiFillHome } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import SearchPokemon from "../components/SearchPokemon";
+
 
 function SearchedPokemon() {
+  const [searchedPokemon, setSearchedPokemon] = useState("");
+  
+
+  const searchPokemon = (pokemonName) => {
+    // Actualizar el estado con el nombre del Pokémon buscado
+    setSearchedPokemon(pokemonName.texto.trim());
+    console.log(searchedPokemon);
+  };
+
+
   return (
     <div className="flex flex-col h-screen">
       <div className="flex items-center justify-between p-4 bg-gray-200">
@@ -17,12 +28,12 @@ function SearchedPokemon() {
           <h1 className="font-primary text-5xl text-blue-pokemon mb-2">
             Gotta catch 'em all!
           </h1>
-          <SearchForm />
+          <SearchForm onClick={searchPokemon} />
         </div>
         <div></div>
       </div>
       <div className="pokemon-list p-4 pt-2 bg-white h-full overflow-y-auto">
-        <PokemonList />
+        <SearchPokemon pokemonName={searchedPokemon} />
       </div>
     </div>
   );
