@@ -31,8 +31,7 @@ function SearchForm() {
 
       <button
         type="submit"
-        className="search-button-container active:scale-95 rounded-full bg-yellow-pokemon border border-black text-blue-pokemon"
-      >
+        className="search-button-container active:scale-95 rounded-full ml-4 py-2 px-3 font-primary bg-blue-pokemon border-2 border-yellow-pokemon text-yellow-pokemon">
         Buscar
       </button>
     </form>

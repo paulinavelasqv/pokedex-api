@@ -4,18 +4,14 @@ import { AiFillHome } from "react-icons/ai";
 import { Link, useParams } from "react-router-dom";
 import SearchPokemon from "../components/SearchPokemon";
 
-
 function SearchedPokemon() {
   const { pokemonName } = useParams();
-  
-  
 
   const handleSearch = (searchTerm) => {
     // You can handle the search logic here, for example, redirect to the new Pokémon page
     console.log("Searching for:", searchTerm);
     // Redirect to the new Pokémon page or update the URL
   };
-
 
   return (
     <div className="flex flex-col h-screen">
