@@ -11,25 +11,23 @@ const PokemonList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if(location.pathname.includes('/pokemon/all')){
-          const response = await axios.get("https://pokeapi.co/api/v2/pokemon/");
+        if (location.pathname.includes("/pokemon/all")) {
+          const response = await axios.get(
+            "https://pokeapi.co/api/v2/pokemon/"
+          );
           setPokemonData(response.data);
-          console.log(response.data);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
 
- 
     fetchData();
-    
-    
   }, [location.pathname]);
 
   return (
     <div id="listaPokemon" className="pokemon-list p-4 pt-8">
-      {pokemonData  && (
+      {pokemonData && (
         <div className="pokemon-cards-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 h-full gap-4">
           {pokemonData.results.map((pokemon) => (
             <PokemonCard
