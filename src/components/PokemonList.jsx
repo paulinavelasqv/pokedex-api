@@ -32,11 +32,13 @@ const PokemonList = () => {
     });
   };
 
+  obtenerId;
+
   return (
     <div id="listaPokemon" className="pokemon-list p-4 pt-8">
       {pokemonData && (
         <div className="pokemon-cards-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 h-full gap-4">
-          {<PokemonCard key={obtenerId} data={pokemonData} flag={allPokemon} />}
+          {<PokemonCard key={id} data={pokemonData} flag={allPokemon} />}
         </div>
       )}
     </div>

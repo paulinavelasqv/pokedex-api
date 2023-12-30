@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import PokemonCardExpanded from "./PokemonCardExpanded";
-import { key } from "localforage";
 
 const PokemonCard = ({ data, flag }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedPokemon, setSelectedPokemon] = useState(null);
 
-  const openModal = () => {
-    setIsModalOpen(true);
+  const openModal = (pokemon) => {
+    setSelectedPokemon(pokemon);
   };
 
   const closeModal = () => {
-    setIsModalOpen(false);
+    setSelectedPokemon(null);
   };
 
   const handleBackgroundClick = (e) => {
@@ -23,7 +22,7 @@ const PokemonCard = ({ data, flag }) => {
   return (
     <>
       {flag ? (
-        // Se mostraran todos los pokemones
+        // Se mostrarán todos los pokemones
         data.results.map((pokemon) => (
           <div
             key={pokemon.url}
@@ -35,31 +34,12 @@ const PokemonCard = ({ data, flag }) => {
               }.png`}
               alt={pokemon.name}
               className="mx-auto mb-2 mt-2 h-64 w-64 object-contain cursor-pointer"
-              onClick={openModal}
+              onClick={() => openModal(pokemon)}
             />
             <p className="text-center font-semibold text-lg">{pokemon.name}</p>
             <p className="text-center font-semibold text-lg">
               #{pokemon.url.split("/")[6]}
             </p>
-
-            {/* Se valida si se presiono la imagen para desplegar tarjeta flotante */}
-            {isModalOpen && (
-              <div
-                className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50"
-                onClick={handleBackgroundClick}
-              >
-                <PokemonCardExpanded
-                  name={pokemon.name}
-                  id={pokemon.url.split("/")[6]}
-                />
-                <button
-                  className="absolute top-2 right-2 text-xl cursor-pointer"
-                  onClick={closeModal}
-                >
-                  X
-                </button>
-              </div>
-            )}
           </div>
         ))
       ) : (
@@ -71,25 +51,33 @@ const PokemonCard = ({ data, flag }) => {
             src={data.sprites.other.dream_world.front_default}
             alt={data.name}
             className="mx-auto mb-2 mt-2 h-64 w-64 object-contain cursor-pointer"
-            onClick={openModal}
+            onClick={() => openModal(data)}
           />
           <p className="text-center font-semibold text-lg">{data.name}</p>
           <p className="text-center font-semibold text-lg">#{data.id}</p>
+        </div>
+      )}
 
-          {isModalOpen && (
-            <div
-              className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50"
-              onClick={handleBackgroundClick}
+      {/* Se valida si se ha seleccionado un Pokémon para mostrar la tarjeta flotante */}
+      {selectedPokemon && (
+        <div
+          className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50"
+          onClick={handleBackgroundClick}
+        >
+          <div className="relative">
+            {" "}
+            {/* Añade la clase relative */}
+            <PokemonCardExpanded
+              name={selectedPokemon.name}
+              id={flag ? selectedPokemon.url.split("/")[6] : selectedPokemon.id}
+            />
+            <button
+              className="absolute top-2 right-2 text-xl cursor-pointer text-black z-10"
+              onClick={closeModal}
             >
-              <PokemonCardExpanded name={data.name} id={data.id} />
-              <button
-                className="absolute top-2 right-2 text-xl cursor-pointer"
-                onClick={closeModal}
-              >
-                X
-              </button>
-            </div>
-          )}
+              X
+            </button>
+          </div>
         </div>
       )}
     </>
