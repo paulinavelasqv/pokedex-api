@@ -68,6 +68,8 @@ const PokemonCard = ({ data, flag }) => {
             {" "}
             {/* Añade la clase relative */}
             <PokemonCardExpanded
+              image={flag ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${
+                selectedPokemon.url.split("/")[6]}.png` : selectedPokemon.sprites.other.dream_world.front_default}
               name={selectedPokemon.name}
               id={flag ? selectedPokemon.url.split("/")[6] : selectedPokemon.id}
             />
